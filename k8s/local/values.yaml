@@ -1,0 +1,51 @@
+airflow:
+  enabled: true
+
+  defaultAirflowTag: "2.10.5"
+  airflowVersion: "2.10.5"
+
+  # Fernet key settings
+  # Note: fernetKey can only be set during install, not upgrade
+  fernetKey: "supersecretfernetkey"
+
+  # Flask secret key for Airflow Webserver: `[webserver] secret_key` in airflow.cfg
+  webserverSecretKey: "supersecretwebserversecretkey"
+
+  # Airflow executor
+  # One of: LocalExecutor, LocalKubernetesExecutor, CeleryExecutor, KubernetesExecutor, CeleryKubernetesExecutor
+  # Specify executors in a prioritized list to leverage multiple execution environments as needed.
+  executor: "CeleryExecutor"
+
+  config:
+    logging:
+      colored_console_log: "True"
+    webserver:
+      expose_config: "True"
+
+  dags:
+    persistence:
+      enabled: true
+
+      accessMode: "ReadOnlyMany"
+      # TODO: come back here and get common name shared between `dags.persistence.existingClaim` and `localDags.name`
+      #existingClaim: "{{ .Values.localDags.name }}"
+      existingClaim: "airflow-dags-folder"
+
+  extraEnv: |
+    - name: ENVIRONMENT
+      value: "local"
+
+# TODO: come back here and get local ingress to work; might need to install `ingress-nginx`
+#  ingress:
+#    web:
+#      enabled: true
+#
+#      hosts:
+#        - name: "airflow.local"
+
+localDags:
+  enabled: true
+
+  capacity: "1Gi"
+  name: "airflow-dags-folder"
+  pathToDags: ~

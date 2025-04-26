@@ -1,0 +1,19 @@
+{{- if .Values.localDags.enabled }}
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: {{ .Values.localDags.name }}
+  labels:
+    component: dags
+    release: {{ .Release.Name }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    heritage: {{ .Release.Service }}
+spec:
+  storageClassName: manual
+  capacity:
+    storage: {{ .Values.localDags.capacity | default "1Gi" }}
+  accessModes:
+    - ReadOnlyMany
+  hostPath:
+    path: {{ .Values.localDags.pathToDags }}
+{{- end }}
