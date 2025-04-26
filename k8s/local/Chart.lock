@@ -2,5 +2,8 @@ dependencies:
 - name: airflow
   repository: https://airflow.apache.org
   version: 1.16.0
-digest: sha256:110baf80b5a23848a9f59d2a62beffe8a06c9f1550690f5c303078d5df1179a7
-generated: "2025-04-24T10:00:35.352039-04:00"
+- name: ingress-nginx
+  repository: https://kubernetes.github.io/ingress-nginx
+  version: 4.12.1
+digest: sha256:c142b9a03d12eff37650afa43104c1c66bc4dcafd30ed64f09468a4567503a89
+generated: "2025-04-26T15:11:23.685805-04:00"

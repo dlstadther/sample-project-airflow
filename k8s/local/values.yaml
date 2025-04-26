@@ -35,13 +35,12 @@ airflow:
     - name: ENVIRONMENT
       value: "local"
 
-# TODO: come back here and get local ingress to work; might need to install `ingress-nginx`
-#  ingress:
-#    web:
-#      enabled: true
-#
-#      hosts:
-#        - name: "airflow.local"
+  ingress:
+    web:
+      enabled: true
+
+      ingressClassName: "nginx"
+      path: "/"
 
 localDags:
   enabled: true
@@ -49,3 +48,6 @@ localDags:
   capacity: "1Gi"
   name: "airflow-dags-folder"
   pathToDags: ~
+
+nginx:
+  enabled: true
