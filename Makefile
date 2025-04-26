@@ -10,7 +10,6 @@ delete-namespace:
 	@echo "Deleting namespace $(NAMESPACE) even if it doesn't exist"
 	kubectl delete namespace $(NAMESPACE)
 
-# temp remove --atomic and --wait 10m
 install: create-namespace
 	@echo "Installing $(RELEASE_NAME) in $(NAMESPACE) namespace"
 	helm upgrade \
@@ -20,8 +19,8 @@ install: create-namespace
 		--install \
 		--namespace=$(NAMESPACE) \
 		--set localDags.pathToDags="$(PWD)/dags" \
-		--values $(CHART_PATH)/values.yaml \
-		--wait 10m
+		--timeout=10m
+		--values=$(CHART_PATH)/values.yaml
 
 lint:
 	@echo "Linting $(CHART_PATH)"
@@ -40,8 +39,8 @@ uninstall:
 
 update-chart-dependencies:
 	@echo "Updating chart dependencies for $(CHART_PATH)"
-	helm dependency build $(CHART_PATH)
 	helm dependency update $(CHART_PATH)
+	helm dependency build $(CHART_PATH)
 
 # Short-hand targets
 init: create-namespace
