@@ -1,3 +1,6 @@
+# Use YAML Anchors to avoid duplication of value between `airflow.dags.persistence.existingClaim` and `localDags.name`
+airflowDagClaimName: &airflowDagClaimName "airflow-dags-folder"
+
 airflow:
   enabled: true
 
@@ -27,9 +30,7 @@ airflow:
       enabled: true
 
       accessMode: "ReadOnlyMany"
-      # TODO: come back here and get common name shared between `dags.persistence.existingClaim` and `localDags.name`
-      #existingClaim: "{{ .Values.localDags.name }}"
-      existingClaim: "airflow-dags-folder"
+      existingClaim: *airflowDagClaimName
 
   extraEnv: |
     - name: ENVIRONMENT
@@ -46,7 +47,7 @@ localDags:
   enabled: true
 
   capacity: "1Gi"
-  name: "airflow-dags-folder"
+  name: *airflowDagClaimName
   pathToDags: ~
 
 nginx:
