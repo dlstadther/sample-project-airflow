@@ -21,7 +21,7 @@ Additionally, configure a local kubernetes cluster. A simple example requires:
 ## Usage
 
 ```shell
-make up
+make k8s-install
 # http://localhost
 # user/pass defaults to `admin/admin`
 
@@ -29,7 +29,7 @@ make up
 # make port-forward
 # <ctrl+c> to exit port-forward
 
-make down
+make k8s-uninstall
 ```
 
 
@@ -40,8 +40,8 @@ helm repo add apache-airflow https://airflow.apache.org
 helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 helm repo update
 
-make update-chart-dependencies
-make lint
+make k8s-update-chart-dependencies
+make k8s-lint
 ```
 
 
