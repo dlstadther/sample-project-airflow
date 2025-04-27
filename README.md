@@ -41,10 +41,6 @@ make lint
 
 
 # TODO
-* [x] create helm chart wrapper around airflow+namespace
-* [x] set desired default airflow values
-* [x] avoid needing to port-forward
-* [x] add pvc for dags to chart (https://airflow.apache.org/docs/helm-chart/stable/manage-dag-files.html#mounting-dags-from-an-externally-populated-pvc)
-* [x] add sample dag (with PythonOperators)
-* [x] add sample dag (with PodOperators)
-* [ ] update helm chart to allow multiple mounted dag folders
+* [ ] support for packaged dags
+* [ ] pv hostpath vs `kubectl cp` to dag folder
+* [ ] airflow 3.x
