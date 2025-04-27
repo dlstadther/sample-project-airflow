@@ -19,7 +19,7 @@ install: create-namespace
 		--install \
 		--namespace=$(NAMESPACE) \
 		--set localDags.pathToDags="$(PWD)/dags" \
-		--timeout=10m
+		--timeout=10m \
 		--values=$(CHART_PATH)/values.yaml
 
 lint:
