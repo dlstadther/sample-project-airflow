@@ -7,7 +7,15 @@ Developing and Running Airflow DAGs locally.
 ```shell
 brew install helm
 brew upgrade helm
+
+brew install kubernetes-cli
+brew upgrade kubernetes-cli
 ```
+
+Additionally, configure a local kubernetes cluster. A simple example requires:
+1. Install Docker Desktop
+2. Settings -> Kubernetes -> Enable Kubernetes -> Kubeadm -> Apply & Restart
+3. `kubectl config use-context docker-desktop`
 
 
 ## Usage
@@ -15,6 +23,7 @@ brew upgrade helm
 ```shell
 make up
 # http://localhost
+# user/pass defaults to `admin/admin`
 
 # if you have a conflict on localhost port 80, then you can port-forward 8080 with:
 # make port-forward
