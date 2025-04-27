@@ -19,7 +19,7 @@ k8s-install: k8s-create-namespace
 		--install \
 		--namespace=$(NAMESPACE) \
 		--set localDags.pathToDags="$(PWD)/dags" \
-		--timeout=10m \
+		--timeout=5m \
 		--values=$(CHART_PATH)/values.yaml
 
 k8s-lint:

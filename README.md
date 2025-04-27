@@ -23,7 +23,7 @@ Additionally, configure a local kubernetes cluster. A simple example requires:
 ```shell
 make k8s-install
 # http://localhost
-# user/pass defaults to `admin/admin`
+# user/pass defaults to `admin/admin` (or whatever user is set in values.yaml's `airflow.webserver.defaultUser`)
 
 # if you have a conflict on localhost port 80, then you can port-forward 8080 with:
 # make port-forward
