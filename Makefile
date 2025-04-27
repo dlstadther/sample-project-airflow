@@ -42,7 +42,24 @@ k8s-update-chart-dependencies:
 	helm dependency update $(CHART_PATH)
 	helm dependency build $(CHART_PATH)
 
-# Short-hand targets
-init: create-namespace
-up: install
-down: uninstall
+format:
+	@echo "Formatting Python code"
+	uv run ruff format
+
+init:
+	@echo "Initializing environment"
+	curl -LsSf https://astral.sh/uv/install.sh | sh
+	uv self update
+
+install:
+	@echo "Installing dependencies"
+	uv sync
+
+lint:
+	@echo "Linting Python code"
+	uv run ruff check --fix
+
+test:
+	@echo "Running tests"
+	uv run pytest -vv
+	uv run coverage report

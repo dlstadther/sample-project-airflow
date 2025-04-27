@@ -4,4 +4,55 @@ version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.11.10"
-dependencies = []
+dependencies = [
+    "apache-airflow==2.10.5",
+    "apache-airflow-providers-cncf-kubernetes>=10.4.3",
+    "apache-airflow-providers-google>=15.1.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3.5",
+    "pytest-cov>=6.1.1",
+    "ruff>=0.11.7",
+]
+
+
+##########
+# Coverage
+##########
+[tool.coverage.run]
+omit = [
+    ".*",
+    "*/site-packages/*",
+]
+source = [
+    "dags",
+]
+
+[tool.coverage.report]
+# increase this "fail" value as more tests are added
+fail_under = 0
+skip_empty = true
+
+
+########
+# Pytest
+########
+[tool.pytest.ini_options]
+pythonpath = [
+    "dags",
+]
+
+addopts = [
+    "--color=yes",
+    "--cov=dags",
+    "--cov-report=xml:pytest.xml",
+]
+
+
+#############
+# Ruff Linter
+#############
+[tool.ruff]
+line-length = 160

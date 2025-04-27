@@ -8,7 +8,6 @@ from airflow import DAG
 from airflow.operators.empty import EmptyOperator
 from airflow.operators.python import PythonOperator, ShortCircuitOperator
 from airflow.providers.cncf.kubernetes.operators.pod import KubernetesPodOperator
-from airflow.providers.google.cloud.operators.kubernetes_engine import GKEStartPodOperator
 
 from utils.functions import can_i_run
 
@@ -37,7 +36,7 @@ def conditional_pod(**context) -> Any | None:
                 get_logs=True,
             )
             return operator.execute(context=context)
-        case ("dev" | "qa" | "staging" | "prod"):
+        case "dev" | "qa" | "staging" | "prod":
             logger.info("Remote Pod")
             logger.warning(f"Cannot run pod when {ENVIRONMENT=}")
             # operator = GKEStartPodOperator()
@@ -56,6 +55,7 @@ with DAG(
         "retries": 1,
         "retry_delay": timedelta(minutes=2),
     },
+    is_paused_upon_creation=False,
     max_active_runs=5,
     render_template_as_native_obj=True,
     schedule=None,

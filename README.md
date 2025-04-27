@@ -42,6 +42,12 @@ helm repo update
 
 make k8s-update-chart-dependencies
 make k8s-lint
+
+make init
+make install
+make format
+make lint
+make test
 ```
 
 
