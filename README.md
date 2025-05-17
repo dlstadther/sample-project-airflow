@@ -59,6 +59,7 @@ make test
 
 
 # TODO
+* [x] fix helm deployment (wait for db migration to finish; but k8s job never launched)
 * [ ] support for packaged dags
 * [ ] pv hostpath vs `kubectl cp` to dag folder
-* [ ] airflow 3.x
+* [x] airflow 3.x
