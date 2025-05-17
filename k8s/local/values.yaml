@@ -49,6 +49,10 @@ airflow:
       ingressClassName: "nginx"
       path: "/"
 
+  redis:
+    # allow redis to be terminated quicker
+    terminationGracePeriodSeconds: 30
+
 localDags:
   enabled: true
 
