@@ -11,15 +11,14 @@ k8s-delete-namespace:
 	kubectl delete namespace $(NAMESPACE)
 
 k8s-install: k8s-create-namespace
+	# Note: Airflow's helm install/upgrade should not be used with any form of helm's `--wait` (including `--atomic`) flag.
 	@echo "Installing $(RELEASE_NAME) in $(NAMESPACE) namespace"
 	helm upgrade \
 		$(RELEASE_NAME) \
 		$(CHART_PATH) \
-		--atomic \
 		--install \
 		--namespace=$(NAMESPACE) \
 		--set localDags.pathToDags="$(PWD)/dags" \
-		--timeout=5m \
 		--values=$(CHART_PATH)/values.yaml
 
 k8s-lint:
