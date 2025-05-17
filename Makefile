@@ -26,9 +26,13 @@ k8s-lint:
 	helm lint $(CHART_PATH) \
 		--values $(CHART_PATH)/values_2.yaml
 
-k8s-port-forward:
+k8s-port-forward-2x:
 	@echo "Port forwarding to $(RELEASE_NAME) in $(NAMESPACE) namespace"
 	kubectl port-forward --namespace=$(NAMESPACE) svc/$(RELEASE_NAME)-webserver 8080:8080
+
+k8s-port-forward-3x:
+	@echo "Port forwarding to $(RELEASE_NAME) in $(NAMESPACE) namespace"
+	kubectl port-forward --namespace=$(NAMESPACE) svc/$(RELEASE_NAME)-api-server 8080:8080
 
 k8s-uninstall:
 	@echo "Uninstalling $(RELEASE_NAME) from $(NAMESPACE) namespace"
