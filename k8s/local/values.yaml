@@ -4,8 +4,10 @@ airflowDagClaimName: &airflowDagClaimName "airflow-dags-folder"
 airflow:
   enabled: true
 
-  defaultAirflowTag: "2.10.5"
-  airflowVersion: "2.10.5"
+#  defaultAirflowTag: "2.10.5"
+#  airflowVersion: "2.10.5"
+  defaultAirflowTag: "3.0.1"
+  airflowVersion: "3.0.1"
 
   # Fernet key settings
   # Note: fernetKey can only be set during install, not upgrade
@@ -20,6 +22,9 @@ airflow:
   executor: "CeleryExecutor"
 
   config:
+    api_auth:
+      # 3.0.0-specific
+      jwt_secret: "abcdefghijklmnopqrstuvwxyz"
     logging:
       colored_console_log: "True"
     webserver:
@@ -37,6 +42,7 @@ airflow:
       value: "local"
 
   ingress:
+    # TODO: ingress missing for 3.x's api server; waiting for updated chart release
     web:
       enabled: true
 
