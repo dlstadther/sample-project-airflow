@@ -5,8 +5,11 @@ Developing and Running Airflow DAGs locally.
 
 ## Setup
 ```shell
-brew install helm
-brew upgrade helm
+brew tap little-angry-clouds/homebrew-my-brews
+brew install helmenv
+brew upgrade helmenv
+
+helmenv install 3.17.3
 
 brew install kubernetes-cli
 brew upgrade kubernetes-cli
